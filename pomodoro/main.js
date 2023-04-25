@@ -9,6 +9,9 @@ const itTask = document.querySelector("#itTask");
 const form = document.querySelector("#form");
 const taskName = document.querySelector("#time #taskName");
 
+renderTime();
+renderTasks();
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   if (itTask.value !== "") {
@@ -57,11 +60,12 @@ function renderTasks() {
 }
 
 function startButtonHandler(id) {
-  time = 5;
+  time = 25 * 60;
   current = id;
   const taskIndex = tasks.findIndex((task) => task.id === id);
-  const taskName = document.querySelector("#time #taskName");
+
   taskName.textContent = tasks[taskIndex].title;
+  renderTime();
 
   timer = setInterval(() => {
     timerHandler(id);
@@ -72,9 +76,33 @@ function timerHandler(id) {
   time--;
   renderTime();
 
-  if (timer === 0) {
+  if (time === 0) {
     clearInterval(timer);
+    markCompleted(id);
+    timer = null;
+    renderTasks();
+    startBreak();
+  }
+}
 
+function startBreak() {
+  time = 5 * 60;
+  taskName.textContent = "break";
+  renderTime();
+  timerBreak = setInterval(() => {
+    timerBreakHandler();
+  }, 1000);
+}
+
+function timerBreakHandler() {
+  time--;
+  renderTime();
+
+  if (time === 0) {
+    clearInterval(timerBreak);
+    current = null;
+    timerBreak = null;
+    taskName.textContent = "";
     renderTasks();
   }
 }
@@ -87,4 +115,9 @@ function renderTime() {
   timeDiv.textContent = `${minutes < 10 ? "0" : ""}${minutes}:${
     seconds < 10 ? "0" : ""
   }${seconds}`;
+}
+
+function markCompleted(id) {
+  const taskIndex = tasks.findIndex((task) => task.id === id);
+  tasks[taskIndex].completed = true;
 }

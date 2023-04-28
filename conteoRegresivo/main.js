@@ -2,9 +2,19 @@ let events = [];
 let arr = []; //aquí cargaremos info
 
 const eventName = document.querySelector("#eventName");
-const eventDate = document.querySelector("#evenDate");
+const eventDate = document.querySelector("#eventDate");
 const eventbAdd = document.querySelector("#bAdd");
 const eventsContainer = document.querySelector("#eventsContainer");
+
+const json = load();
+try {
+  arr = JSON.parse(json);
+} catch (error) {
+  arr = [];
+}
+events = arr ? [...arr] : [];
+
+renderEvents();
 
 document.querySelector("form").addEventListener("submit", (e) => {
   e.preventDefault();
@@ -26,6 +36,8 @@ function addEvent() {
     date: eventDate.value,
   };
   events.unshift(newEvent);
+  save(JSON.stringify(events));
+
   eventName.value = "";
   renderEvents();
 }
@@ -34,13 +46,13 @@ function dateDiff(d) {
   const targetDate = new Date(d);
   const today = new Date();
   const difference = targetDate.getTime() - today.getTime();
-  const days = Match.ceil(difference / (1000 * 3600 * 24));
+  const days = Math.ceil(difference / (1000 * 3600 * 24));
 
   return days;
 }
 
 function renderEvents() {
-  const eventsHTML = events.mao((event) => {
+  const eventsHTML = events.map((event) => {
     return `
       <div class="event">
         <div class="days">
@@ -51,10 +63,30 @@ function renderEvents() {
           <div class="event-name">${event.name} </div>
           <div class="event-name">${event.date} </div>
           <div class="actions">
-            <button></button>
+            <button class="bDelete" data-id="${event.id}">Eliminar</button>
           </div>  
         
       </div>
     `;
   });
+
+  eventsContainer.innerHTML = eventsHTML.join("");
+  document.querySelectorAll(".bDelete").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const id = button.getAttribute("data-id");
+      events = events.filter((event) => event.id !== id);
+
+      save(JSON.stringify(events));
+
+      renderEvents();
+    });
+  });
+}
+
+function save(data) {
+  localStorage.setItem("items", data);
+}
+
+function load() {
+  return localStorage.getItem("items");
 }

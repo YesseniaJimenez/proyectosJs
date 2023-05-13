@@ -2,7 +2,7 @@ const comments = [];
 
 const inputContainer = document.createElement("div");
 const input = document.createElement("input");
-const commentsContainer = document.querySelector("#comments-container"); // Declara commentsContainer como variable local
+commentsContainer = document.querySelector("#comments-container");
 input.classList.add("input");
 
 input.addEventListener("keydown", (e) => {
@@ -25,11 +25,12 @@ function handleEnter(e, current) {
     e.target.value = "";
     commentsContainer.innerHTML = "";
     commentsContainer.appendChild(inputContainer);
+    console.log(comments);
 
     renderComments(comments, commentsContainer);
   }
 }
-
+console.log(comments);
 function renderComments(arr, parent) {
   arr.forEach((element) => {
     const commentContainer = document.createElement("div");
@@ -47,8 +48,8 @@ function renderComments(arr, parent) {
 
     replyButton.textContent = "Reply";
     likeButton.textContent = `${
-      element.likes > 0 ? `${element.likes} likes` : "Like"
-    }`; // Usa element.likes en lugar de element.liked
+      element.likes > 0 ? `${element.liked}  likes` : "like"
+    }`;
 
     replyButton.addEventListener("click", (e) => {});
     likeButton.addEventListener("click", (e) => {});

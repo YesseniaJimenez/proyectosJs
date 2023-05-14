@@ -25,12 +25,11 @@ function handleEnter(e, current) {
     e.target.value = "";
     commentsContainer.innerHTML = "";
     commentsContainer.appendChild(inputContainer);
-    console.log(comments);
 
     renderComments(comments, commentsContainer);
   }
 }
-console.log(comments);
+
 function renderComments(arr, parent) {
   arr.forEach((element) => {
     const commentContainer = document.createElement("div");
@@ -51,7 +50,15 @@ function renderComments(arr, parent) {
       element.likes > 0 ? `${element.liked}  likes` : "like"
     }`;
 
-    replyButton.addEventListener("click", (e) => {});
+    replyButton.addEventListener("click", (e) => {
+      const newInput = inputContainer.cloneNode(true);
+      newInput.value = "";
+      newInput.focus();
+      newInput.addEventListener("keydown", (e) => {
+        handleEnter(e, element);
+      });
+      commentContainer.insertBefore(newInput, responsesContainer);
+    });
     likeButton.addEventListener("click", (e) => {});
 
     commentContainer.appendChild(textContainer);

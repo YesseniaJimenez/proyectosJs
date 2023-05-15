@@ -47,7 +47,7 @@ function renderComments(arr, parent) {
 
     replyButton.textContent = "Reply";
     likeButton.textContent = `${
-      element.likes > 0 ? `${element.liked}  likes` : "like"
+      element.likes > 0 ? `${element.likes}  likes` : "like"
     }`;
 
     replyButton.addEventListener("click", (e) => {
@@ -59,7 +59,12 @@ function renderComments(arr, parent) {
       });
       commentContainer.insertBefore(newInput, responsesContainer);
     });
-    likeButton.addEventListener("click", (e) => {});
+    likeButton.addEventListener("click", (e) => {
+      element.likes++;
+      likeButton.textContent = `${
+        element.likes > 0 ? `${element.likes}  likes` : "like"
+      }`;
+    });
 
     commentContainer.appendChild(textContainer);
     commentContainer.appendChild(actionsContainer);
@@ -73,4 +78,6 @@ function renderComments(arr, parent) {
     }
     parent.appendChild(commentContainer);
   });
+
+  console.log(comments);
 }

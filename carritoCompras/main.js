@@ -42,7 +42,7 @@ const shoppingCart = {
         if (shoppingCart.methods.hasInventory(id, qty + cartItem.qty)) {
           cartItem.qty += qty;
         } else {
-          alert("no hay suficientes unidades de este producto");
+          alert("En este momento no hay suficientes unidades de este producto");
         }
       } else {
         shoppingCart.items.push({ id, qty });

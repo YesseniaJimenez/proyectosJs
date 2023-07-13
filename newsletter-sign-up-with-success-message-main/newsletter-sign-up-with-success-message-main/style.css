@@ -13,21 +13,17 @@ font-weight: lighter;
     justify-content: space-between;
     background-color: hsl(0, 0%, 100%);
     padding: 1.2em 2em 1.6em 3em;
-    width: 55vw;
-    height: 41vw;
+   
     border-radius: 25px;
    
     
 }
-#principal p{
-    width: 28vw;
-}
+
 
 #principal h1{
     font-size: 3.3em;
     font-weight: 700;
     margin-bottom: 25px;
-    width: 28vw;
     margin-top: 60px;
 }
 ul{
@@ -51,19 +47,7 @@ ul li::before{
 }
 
 
-#error{
-    display: flex;
-    flex-direction:row; 
-    justify-content: space-between;
-    width: 348px;
-    font-weight: bold;
-    font-size: 0.8em;
-}
-#email-error {
-    color: red;
-    display: inline-block;
-    width: 17em;
-}
+
 #register{
     display: flex;
     flex-direction: column;
@@ -86,6 +70,20 @@ ul li::before{
     background-color: rgb(251, 189, 187);
     border-color: red;
     color: red;
+}
+#error {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+#email-error {
+    color: red;
+    display: inline-block;
+    width: 17em;
 }
 button{
     color:hsl(0, 0%, 100%);
@@ -149,4 +147,87 @@ margin-bottom: 30px;
 
     margin-left: auto;
     margin-right: auto;
+}
+/*--------------------------MOBILE------------------------------*/
+@media (max-width: 375px){
+    body {
+           
+            background-color:hsl(0, 0%, 100%);;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-weight: lighter;
+            width: 100%;
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right:0 ;
+    }
+
+     #principal {
+        display: flex;
+        flex-direction: column;
+        background-color: hsl(0, 0%, 100%);
+        padding: 0;
+        
+        border-radius: 25px;
+
+
+     }
+    #desktop-ilustration{
+        display: none;
+    }
+    #mobile-ilustration{
+        display: block;
+       height: 300px;
+        width: 390px;
+        margin-right: 0px;
+    }
+        
+    #principal h1 {
+        font-size: 2.5em;
+        font-weight: 700;
+        margin-right: 2em;
+        margin-bottom: 25px;
+        width: auto;
+        margin-top: 60px;
+    }
+    #principal p {
+        width: auto;
+       
+    }
+    #text{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    ul{
+        margin-right: 20px;
+       display: flex;
+       flex-direction: column;
+       justify-content: space-between;
+        height: 25vh;
+    }
+    ul li::before {
+        position: relative;
+        display: inline-block;
+        width: 8px;
+        height: 0px;
+
+        margin-right: 30px;
+        padding-right: 0; 
+
+    }
+
+    #emain-input {         
+        width: 320px;
+        height: 45px;       
+    }
+
+    button {
+        width: 342px;
+        height: 47px;
+        border-radius: 8px;
+        font-weight: bold;
+        border-width: 0;
+    }
 }
